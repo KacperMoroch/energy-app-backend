@@ -3,11 +3,13 @@ import { API_BASE_URL, CLEAN_ENERGY_SOURCES } from '../utils/constants';
 
 export const calculateOptimalWindow = async (hours: number) => {
     const now = new Date();
-    const inTwoDays = new Date(now);
-    inTwoDays.setUTCDate(now.getUTCDate() + 2);
+
+    const endOfTomorrow = new Date(now);
+    endOfTomorrow.setDate(now.getDate() + 1);
+    endOfTomorrow.setHours(23, 59, 59, 999);
 
     const from = now.toISOString();
-    const to = inTwoDays.toISOString();
+    const to = endOfTomorrow.toISOString();
 
     const response = await axios.get(`${API_BASE_URL}/generation/${from}/${to}`);
     const data = response.data.data;
