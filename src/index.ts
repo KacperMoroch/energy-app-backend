@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import energyRoutes from './routes/energyRoutes';
 
 dotenv.config();
 
@@ -12,6 +13,8 @@ app.use(cors({
 }));
 
 app.use(express.json());
+
+app.use('/api', energyRoutes);
 
 app.get('/', (req, res) => {
     res.send('Backend działa poprawnie!');
