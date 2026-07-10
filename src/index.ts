@@ -20,6 +20,10 @@ app.get('/', (req, res) => {
     res.send('Backend działa poprawnie!');
 });
 
-app.listen(PORT, () => {
-    console.log(`Serwer uruchomiony na porcie: ${PORT}`);
-});
+if (process.env.NODE_ENV !== 'test') {
+    app.listen(PORT, () => {
+        console.log(`Serwer uruchomiony na porcie: ${PORT}`);
+    });
+}
+
+export default app;
